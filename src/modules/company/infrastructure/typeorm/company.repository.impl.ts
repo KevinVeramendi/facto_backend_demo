@@ -9,19 +9,37 @@ import { CompanyRepository } from '../../domain/repository/company.repository';
 export class CompanyRepositoryImpl implements CompanyRepository {
     constructor(
         @InjectRepository(Company)
-        private readonly repo: Repository<Company>,
-    ) { }
+        private readonly repository: Repository<Company>,
+    ) {}
+
+    async findByBusinessName(businessName: string): Promise<any> {
+        const company = await this.repository.findOne({
+            where: { businessName },
+        });
+        if (!company) {
+            throw new Error(`Company with Ruc ${businessName} not found`);
+        }
+        return { "": 1 };
+    }
+
+    async findByRuc(ruc: string): Promise<Company> {
+        const company = await this.repository.findOne({ where: { ruc } });
+        if (!company) {
+            throw new Error(`Company with Ruc ${ruc} not found`);
+        }
+        return company;
+    }
 
     create(company: Company): Promise<Company> {
-        return this.repo.save(company);
+        return this.repository.save(company);
     }
 
     findAll(): Promise<Company[]> {
-        return this.repo.find();
+        return this.repository.find();
     }
 
     async findById(id: number): Promise<Company> {
-        const company = await this.repo.findOneBy({ id });
+        const company = await this.repository.findOneBy({ id });
         if (!company) {
             throw new Error(`Company with ID ${id} not found`);
         }
@@ -29,10 +47,10 @@ export class CompanyRepositoryImpl implements CompanyRepository {
     }
 
     update(id: number, data: Partial<Company>): Promise<Company> {
-        return this.repo.save({ id, ...data });
+        return this.repository.save({ id, ...data });
     }
 
     async delete(id: number): Promise<void> {
-        await this.repo.delete(id);
+        await this.repository.delete(id);
     }
 }

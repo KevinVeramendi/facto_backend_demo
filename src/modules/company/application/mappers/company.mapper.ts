@@ -1,6 +1,6 @@
 //  Transforma un DTO en una entidad del dominio
-import { Company } from "../../domain/entities/company.entity";
-import { CreateCompanyDto } from "../dto/create-company.dto";
+import { Company } from '../../domain/entities/company.entity';
+import { CreateCompanyDto } from '../dto/create-company.dto';
 
 export class CompanyMapper {
     static fromCreateDto(dto: CreateCompanyDto): Company {
