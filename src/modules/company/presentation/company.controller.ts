@@ -1,16 +1,5 @@
 // Controlador que expone los endpoints para gestionar empresas
-import {
-    Controller,
-    Get,
-    Post,
-    Body,
-    Param,
-    Put,
-    Delete,
-    UsePipes,
-    ValidationPipe,
-    Query,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Query } from '@nestjs/common';
 import { CompanyService } from '../application/use-cases/company.service';
 import { CreateCompanyDto } from '../application/dto/create-company.dto';
 import { UpdateCompanyDto } from '../application/dto/update-company.dto';
@@ -34,11 +23,8 @@ export class CompanyController {
         return this.companyService.findById(+id);
     }
 
-    @Get('ruc/:ruc')
-    // @UsePipes(new ValidationPipe({ transform: true }))
-    findByRuc(
-        @Query('ruc', new ValidationPipe({ transform: true })) ruc: string,
-    ) {
+    @Get('ruc/')
+    findByRuc(@Query('ruc') ruc: string) {
         return this.companyService.findByRuc(ruc);
     }
 
@@ -50,10 +36,5 @@ export class CompanyController {
     @Put(':id')
     update(@Param('id') id: string, @Body() dto: UpdateCompanyDto) {
         return this.companyService.update(+id, dto);
-    }
-
-    @Delete(':id')
-    delete(@Param('id') id: string) {
-        return this.companyService.delete(+id);
     }
 }

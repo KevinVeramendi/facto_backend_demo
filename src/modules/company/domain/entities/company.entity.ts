@@ -1,6 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
 
-// Representa el modelo de negocio de la empresa
 @Entity('companies')
 export class Company {
     @PrimaryGeneratedColumn()
@@ -13,6 +12,7 @@ export class Company {
     ruc: string;
     @Column()
     address: string;
+    @JoinColumn()
     @Column()
     ubigeo: string;
 }

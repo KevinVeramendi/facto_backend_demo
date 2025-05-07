@@ -12,14 +12,14 @@ export class CompanyRepositoryImpl implements CompanyRepository {
         private readonly repository: Repository<Company>,
     ) {}
 
-    async findByBusinessName(businessName: string): Promise<any> {
+    async findByBusinessName(businessName: string): Promise<Company> {
         const company = await this.repository.findOne({
             where: { businessName },
         });
         if (!company) {
             throw new Error(`Company with Ruc ${businessName} not found`);
         }
-        return { "": 1 };
+        return company;
     }
 
     async findByRuc(ruc: string): Promise<Company> {

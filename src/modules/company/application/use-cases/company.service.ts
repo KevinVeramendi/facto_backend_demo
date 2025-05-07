@@ -33,8 +33,4 @@ export class CompanyService {
     update(id: number, data: UpdateCompanyDto) {
         return this.companyRepository.update(id, data);
     }
-
-    delete(id: number) {
-        return this.companyRepository.delete(id);
-    }
 }
