@@ -7,26 +7,34 @@ import { CompanyMapper } from '../mappers/company.mapper';
 
 @Injectable()
 export class CompanyService {
-    constructor(private readonly companyRepo: CompanyRepository) { }
+    constructor(private readonly companyRepository: CompanyRepository) {}
 
     create(data: CreateCompanyDto) {
         const company = CompanyMapper.fromCreateDto(data);
-        return this.companyRepo.create(company);
+        return this.companyRepository.create(company);
     }
 
     findAll() {
-        return this.companyRepo.findAll();
+        return this.companyRepository.findAll();
     }
 
     findById(id: number) {
-        return this.companyRepo.findById(id);
+        return this.companyRepository.findById(id);
+    }
+
+    findByRuc(ruc: string) {
+        return this.companyRepository.findByRuc(ruc);
+    }
+
+    findByBusinessName(businessName: string) {
+        return this.companyRepository.findByBusinessName(businessName);
     }
 
     update(id: number, data: UpdateCompanyDto) {
-        return this.companyRepo.update(id, data);
+        return this.companyRepository.update(id, data);
     }
 
     delete(id: number) {
-        return this.companyRepo.delete(id);
+        return this.companyRepository.delete(id);
     }
 }
