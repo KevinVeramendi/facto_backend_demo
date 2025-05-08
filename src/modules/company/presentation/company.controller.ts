@@ -4,7 +4,7 @@ import { CompanyService } from '../application/use-cases/company.service';
 import { CreateCompanyDto } from '../application/dto/create-company.dto';
 import { UpdateCompanyDto } from '../application/dto/update-company.dto';
 
-@Controller('companies')
+@Controller('company')
 export class CompanyController {
     constructor(private readonly companyService: CompanyService) {}
 

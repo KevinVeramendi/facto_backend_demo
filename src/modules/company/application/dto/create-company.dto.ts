@@ -1,15 +1,39 @@
-import { IsEmail, IsEmpty, IsNotEmpty, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsBoolean, IsDate, IsOptional, IsString } from 'class-validator';
+import { UUID } from 'typeorm/driver/mongodb/bson.typings';
 
 export class CreateCompanyDto {
     @IsString()
-    businessName: string;
+    companyRuc: string;
     @IsString()
-    tradeName: string;
-    @IsEmpty()
+    companyBusinessName: string;
     @IsString()
-    ruc: string;
+    companyTradeName: string;
+    @IsOptional()
     @IsString()
-    address: string;
+    companySoapUser?: string;
+    @IsOptional()
     @IsString()
-    ubigeo: string;
+    companySoapPassword?: string;
+    @IsOptional()
+    @IsString()
+    companyCertificate?: string;
+    @IsOptional()
+    @IsString()
+    companyCertificatePassword?: string;
+    @IsString()
+    companyDetraction: string;
+    @IsOptional()
+    @IsString()
+    companyDomain?: string;
+    @IsBoolean()
+    companyState: boolean;
+    @IsOptional()
+    @IsDate()
+    @Type(() => Date)
+    createdAt?: Date;
+    @IsOptional()
+    @IsDate()
+    @Type(() => Date)
+    updatedAt?: Date;
 }

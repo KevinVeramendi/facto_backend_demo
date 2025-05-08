@@ -5,11 +5,17 @@ import { CreateCompanyDto } from '../dto/create-company.dto';
 export class CompanyMapper {
     static fromCreateDto(dto: CreateCompanyDto): Company {
         const company = new Company();
-        company.businessName = dto.businessName;
-        company.tradeName = dto.tradeName;
-        company.ruc = dto.ruc;
-        company.address = dto.address;
-        company.ubigeo = dto.ubigeo;
+        company.companyRuc = dto.companyRuc;
+        company.companyBusinessName = dto.companyBusinessName;
+        company.companySoapUser = dto.companySoapUser;
+        company.companySoapPassword = dto.companySoapPassword;
+        company.companyCertificate = dto.companyCertificate;
+        company.companyCertificatePassword = dto.companyCertificatePassword;
+        company.companyDetraction = dto.companyDetraction;
+        company.companyDomain = dto.companyDomain;
+        company.companyState = dto.companyState;
+        company.createdAt = dto.createdAt;
+        company.updatedAt = dto.updatedAt;
         return company;
     }
 }
