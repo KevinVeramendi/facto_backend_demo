@@ -1,4 +1,3 @@
-// Implementa la lógica real para persistir empresas con TypeORM
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -12,18 +11,20 @@ export class CompanyRepositoryImpl implements CompanyRepository {
         private readonly repository: Repository<Company>,
     ) {}
 
-    async findByBusinessName(businessName: string): Promise<any> {
+    async findByBusinessName(businessName: string): Promise<Company> {
         const company = await this.repository.findOne({
-            where: { businessName },
+            where: { companyBusinessName: businessName },
         });
         if (!company) {
             throw new Error(`Company with Ruc ${businessName} not found`);
         }
-        return { "": 1 };
+        return company;
     }
 
     async findByRuc(ruc: string): Promise<Company> {
-        const company = await this.repository.findOne({ where: { ruc } });
+        const company = await this.repository.findOne({
+            where: { companyRuc: ruc },
+        });
         if (!company) {
             throw new Error(`Company with Ruc ${ruc} not found`);
         }
@@ -39,7 +40,7 @@ export class CompanyRepositoryImpl implements CompanyRepository {
     }
 
     async findById(id: number): Promise<Company> {
-        const company = await this.repository.findOneBy({ id });
+        const company = await this.repository.findOneBy({ companyId: id });
         if (!company) {
             throw new Error(`Company with ID ${id} not found`);
         }
@@ -47,7 +48,7 @@ export class CompanyRepositoryImpl implements CompanyRepository {
     }
 
     update(id: number, data: Partial<Company>): Promise<Company> {
-        return this.repository.save({ id, ...data });
+        return this.repository.save({ companyId: id, ...data });
     }
 
     async delete(id: number): Promise<void> {

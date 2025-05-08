@@ -1,4 +1,3 @@
-// Casos de uso del negocio(crear, editar, eliminar, buscar empresas)
 import { Injectable } from '@nestjs/common';
 import { CompanyRepository } from '../../domain/repository/company.repository';
 import { CreateCompanyDto } from '../dto/create-company.dto';
@@ -32,9 +31,5 @@ export class CompanyService {
 
     update(id: number, data: UpdateCompanyDto) {
         return this.companyRepository.update(id, data);
-    }
-
-    delete(id: number) {
-        return this.companyRepository.delete(id);
     }
 }
